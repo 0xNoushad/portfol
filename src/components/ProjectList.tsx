@@ -31,6 +31,12 @@ const ProjectList = ({ projects }: ProjectListProps) => {
   const currentProject = hoveredIndex !== null ? currentPageProjects[hoveredIndex] : null;
   const currentMobileProject = projects[currentMobileIndex];
 
+  console.log('ProjectList rendering:', { 
+    projectsCount: projects.length, 
+    currentMobileProject,
+    currentProject 
+  });
+
   const handleMouseLeave = () => {
     setHoveredIndex(null);
   };
@@ -61,6 +67,10 @@ const ProjectList = ({ projects }: ProjectListProps) => {
       }
     }
   };
+
+  if (!projects || projects.length === 0) {
+    return <div className="text-muted">No projects found</div>;
+  }
 
   return (
     <>
