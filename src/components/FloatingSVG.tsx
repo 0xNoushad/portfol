@@ -33,7 +33,7 @@ export default function FloatingSVG({
 
   return (
     <div 
-      className={`fixed pointer-events-none z-0 opacity-15 dark:opacity-25 brightness-50 dark:brightness-100 dark:invert ${sizeClasses[size]}`}
+      className={`hidden md:block fixed pointer-events-none z-0 opacity-15 dark:opacity-25 brightness-50 dark:brightness-100 dark:invert ${sizeClasses[size]}`}
       style={style}
     >
       <img src={svg} alt="" className="w-full h-full" loading="lazy" />

@@ -141,11 +141,11 @@ const ogImageURL = new URL(image, Astro.site || "https://noushad.live").toString
     <FloatingSVG client:load svg="/svg/story.svg" bottom="60%" left="35%" size="sm" rotate={30} />
     <FloatingSVG client:load svg="/svg/traingle.svg" top="52%" left="48%" size="sm" rotate={-8} />
     
-    <div id="site-content" class="transition-opacity duration-500 overflow-x-hidden max-w-full" transition:animate={fade({ duration: '0.3s' })}>
+    <div id="site-content" class="transition-opacity duration-500 overflow-x-hidden w-full min-h-screen flex items-center" transition:animate={fade({ duration: '0.3s' })}>
       <main
         id="main-content"
         class:list={[
-          "relative z-10 flex flex-col min-h-screen mx-auto px-4 sm:px-8 pt-8 sm:pt-20 max-w-full",
+          "relative z-10 flex flex-col w-full mx-auto px-4 sm:px-8 py-8 sm:py-20",
           wide ? "max-w-6xl" : "max-w-4xl",
         ]}
       >
