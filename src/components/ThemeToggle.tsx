@@ -17,6 +17,10 @@ const ThemeToggle = () => {
 
   useEffect(() => {
     const getThemePreference = (): Theme => {
+      // Check if dark class is already on html element (from inline script)
+      if (document.documentElement.classList.contains("dark")) {
+        return "dark";
+      }
       if (typeof localStorage !== "undefined" && localStorage.getItem(THEME_STORAGE_KEY)) {
         return localStorage.getItem(THEME_STORAGE_KEY) as Theme;
       }
@@ -46,13 +50,18 @@ const ThemeToggle = () => {
   }, [theme]);
 
   const toggleTheme = () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    
     const audio = new Audio("/light-switch.mp3");
     audio.volume = SOUND_VOLUME;
     audio.play().catch(() => {
       // Ignore audio play errors (e.g., user hasn't interacted with page yet)
     });
     
-    setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
+    setTheme(newTheme);
+    
+    // Dispatch custom event for other components
+    window.dispatchEvent(new CustomEvent("theme-toggle", { detail: { theme: newTheme } }));
   };
 
   const ariaLabel = theme === "dark" ? "Switch to light theme" : "Switch to dark theme";
