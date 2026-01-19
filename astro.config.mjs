@@ -19,15 +19,17 @@ export default defineConfig({
         output: {
           // Split vendor code into separate chunks
           manualChunks: (id) => {
-            // Split React and Motion into separate chunks
-            if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
-              return 'vendor-react';
-            }
-            if (id.includes('node_modules/motion') || id.includes('node_modules/framer-motion')) {
-              return 'vendor-motion';
-            }
-            // Other node_modules go into vendor chunk
+            // Split node_modules into vendor chunk
             if (id.includes('node_modules')) {
+              // Group all React-related packages together
+              if (id.includes('react') || id.includes('react-dom') || id.includes('scheduler')) {
+                return 'vendor-react';
+              }
+              // Group motion/framer-motion together
+              if (id.includes('motion') || id.includes('framer-motion')) {
+                return 'vendor-motion';
+              }
+              // Everything else goes to vendor
               return 'vendor';
             }
           },
