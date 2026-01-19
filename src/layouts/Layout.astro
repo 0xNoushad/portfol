@@ -28,6 +28,7 @@ const canonicalURL = new URL(
   Astro.site || "https://noushad.live"
 );
 const fullTitle = title === "noushad" ? title : `${title} | noushad`;
+const ogImageURL = new URL(image, Astro.site || "https://noushad.live").toString();
 ---
 
 <html lang="en" transition:animate={fade({ duration: '0.3s' })}>
@@ -53,14 +54,20 @@ const fullTitle = title === "noushad" ? title : `${title} | noushad`;
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:width" content="656" />
+    <meta property="og:image:height" content="320" />
+    <meta property="og:image:alt" content={fullTitle} />
+    <meta property="og:site_name" content="noushad" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@0xNoushad" />
+    <meta name="twitter:creator" content="@0xNoushad" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={image} />
+    <meta name="twitter:image" content={ogImageURL} />
+    <meta name="twitter:image:alt" content={fullTitle} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png" />
@@ -138,7 +145,7 @@ const fullTitle = title === "noushad" ? title : `${title} | noushad`;
       <main
         id="main-content"
         class:list={[
-          "relative z-10 flex flex-col min-h-screen mx-auto px-8 pt-20",
+          "relative z-10 flex flex-col min-h-screen mx-auto px-4 sm:px-8 pt-20",
           wide ? "max-w-6xl" : "max-w-4xl",
         ]}
       >

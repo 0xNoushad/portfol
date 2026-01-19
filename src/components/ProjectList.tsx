@@ -129,62 +129,54 @@ const ProjectList = ({ projects }: ProjectListProps) => {
       </div>
 
       {/* Mobile view - carousel */}
-      <div className="sm:hidden pt-14 relative min-h-[500px]">
+      <div className="sm:hidden pt-8 relative w-full">
         <div
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
+          className="w-full touch-pan-y"
         >
           <AnimatePresence mode="wait">
             <motion.div
               key={currentMobileIndex}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2, ease: "easeInOut" }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="w-full"
             >
               {currentMobileProject.image && (
-                <div className="w-full rounded-lg overflow-hidden">
+                <div className="w-full rounded-lg overflow-hidden mb-6">
                   <img
                     src={currentMobileProject.image}
                     alt={currentMobileProject.title}
-                    className="w-full h-auto"
+                    className="w-full h-auto max-w-full object-contain"
                     draggable="false"
                   />
                 </div>
               )}
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Fixed position text */}
-          <div className="absolute bottom-16 left-0 right-0 text-center">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentMobileIndex}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2, ease: "easeInOut" }}
-              >
+              
+              {/* Project info below image */}
+              <div className="text-center px-4 mb-8">
                 <a
                   href={currentMobileProject.url || "#"}
                   target={currentMobileProject.url?.startsWith("http") ? "_blank" : undefined}
                   rel={currentMobileProject.url?.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="block space-y-1"
+                  className="block space-y-2"
                 >
-                  <h3 className="font-medium text-[#3C82F7] text-base">
+                  <h3 className="font-medium text-[#3C82F7] text-lg">
                     {currentMobileProject.title}
                   </h3>
-                  <p className="text-muted text-sm">
+                  <p className="text-muted text-sm leading-relaxed">
                     {currentMobileProject.description}
                   </p>
                 </a>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
 
           {/* Pagination dots for mobile */}
-          <div className="flex items-center justify-center gap-2 absolute bottom-6 left-0 right-0">
+          <div className="flex items-center justify-center gap-2 mt-6">
             {projects.map((_, index) => (
               <button
                 key={index}

@@ -61,8 +61,10 @@ const { links = defaultLinks } = Astro.props;
   .nav-container {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: var(--linkGap);
     font-size: 0.875rem;
+    max-width: 100%;
   }
 
   .link-item {
@@ -73,6 +75,8 @@ const { links = defaultLinks } = Astro.props;
     margin: -0.5rem;
     cursor: pointer;
     transition: all var(--linkTransitionDuration) ease-in-out;
+    word-break: break-word;
+    max-width: 100%;
   }
 
   .link-item:hover {
