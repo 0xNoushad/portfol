@@ -5,12 +5,12 @@ import { LinkIcon } from "@phosphor-icons/react";
 ---
 
 <Layout title="setup" description="hardware and software i use daily">
-  <section class="pt-8">
+  <section class="pt-2 sm:pt-8">
     <h1 class="text-3xl font-medium mb-2 font-display">setup</h1>
-    <p class="text-muted text-sm mb-8 sm:mb-12">hardware and software i use daily<span class="green">.</span></p>
+    <p class="text-muted text-sm mb-6 sm:mb-12">hardware and software i use daily<span class="green">.</span></p>
 
     <!-- Consistent spacing between categories: space-y-12 -->
-    <div class="space-y-8 sm:space-y-12">
+    <div class="space-y-6 sm:space-y-12">
       {
         setup.map((category) => (
           <div>
@@ -81,7 +81,7 @@ import { LinkIcon } from "@phosphor-icons/react";
 
     <a
       href="/"
-      class="text-muted block mt-64 sm:mt-16 underline hover:text-foreground transition-colors duration-300 text-right"
+      class="text-muted block mt-12 sm:mt-16 underline hover:text-foreground transition-colors duration-300 text-right"
       >back to home</a
     >
   </section>

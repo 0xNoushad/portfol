@@ -8,7 +8,7 @@ interface Props {
 const { showThemeToggle = false } = Astro.props;
 ---
 
-<footer class="py-8 mt-auto flex items-center justify-end">
+<footer class="py-4 sm:py-8 mt-auto flex items-center justify-end">
   {showThemeToggle && (
     <div class="flex items-center gap-2">
       <ThemeToggle client:load />

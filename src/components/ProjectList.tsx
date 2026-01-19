@@ -65,37 +65,35 @@ const ProjectList = ({ projects }: ProjectListProps) => {
   return (
     <>
       {/* Desktop view */}
-      <div className="hidden sm:block h-full relative">
-        <div className="flex gap-16 h-full">
-          <div className="flex-1 max-w-md flex flex-col">
-            <div className="min-h-[500px]">
-              <AnimatePresence mode="wait">
-                <motion.ul
-                  key={currentPage}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.2, ease: "easeInOut" }}
-                  className="relative space-y-1 group/list"
-                  onMouseLeave={handleMouseLeave}
-                >
-                  {currentPageProjects.map((project, index) => (
-                    <ProjectItem
-                      key={project.title}
-                      ref={(el) => {
-                        itemRefs.current[index] = el;
-                      }}
-                      project={project}
-                      onMouseEnter={() => handleMouseEnter(index)}
-                    />
-                  ))}
-                </motion.ul>
-              </AnimatePresence>
-            </div>
+      <div className="hidden sm:block w-full">
+        <div className="flex gap-16">
+          <div className="flex-1 max-w-md">
+            <AnimatePresence mode="wait">
+              <motion.ul
+                key={currentPage}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2, ease: "easeInOut" }}
+                className="relative space-y-1 group/list mb-8"
+                onMouseLeave={handleMouseLeave}
+              >
+                {currentPageProjects.map((project, index) => (
+                  <ProjectItem
+                    key={project.title}
+                    ref={(el) => {
+                      itemRefs.current[index] = el;
+                    }}
+                    project={project}
+                    onMouseEnter={() => handleMouseEnter(index)}
+                  />
+                ))}
+              </motion.ul>
+            </AnimatePresence>
 
-            {/* Pagination numbers - Desktop - Fixed position */}
+            {/* Pagination numbers - Desktop */}
             {totalPages > 1 && (
-              <div className="flex items-center gap-3 text-sm mt-16">
+              <div className="flex items-center gap-3 text-sm">
                 {Array.from({ length: totalPages }).map((_, index) => (
                   <button
                     key={index}
@@ -129,7 +127,7 @@ const ProjectList = ({ projects }: ProjectListProps) => {
       </div>
 
       {/* Mobile view - carousel */}
-      <div className="sm:hidden pt-8 relative w-full">
+      <div className="sm:hidden w-full">
         <div
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
@@ -146,7 +144,7 @@ const ProjectList = ({ projects }: ProjectListProps) => {
               className="w-full"
             >
               {currentMobileProject.image && (
-                <div className="w-full rounded-lg overflow-hidden mb-6">
+                <div className="w-full rounded-lg overflow-hidden mb-4">
                   <img
                     src={currentMobileProject.image}
                     alt={currentMobileProject.title}
@@ -157,14 +155,14 @@ const ProjectList = ({ projects }: ProjectListProps) => {
               )}
               
               {/* Project info below image */}
-              <div className="text-center px-4 mb-8">
+              <div className="text-center px-2 mb-6">
                 <a
                   href={currentMobileProject.url || "#"}
                   target={currentMobileProject.url?.startsWith("http") ? "_blank" : undefined}
                   rel={currentMobileProject.url?.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="block space-y-2"
+                  className="block space-y-1"
                 >
-                  <h3 className="font-medium text-[#3C82F7] text-lg">
+                  <h3 className="font-medium text-[#3C82F7] text-base">
                     {currentMobileProject.title}
                   </h3>
                   <p className="text-muted text-sm leading-relaxed">
@@ -176,7 +174,7 @@ const ProjectList = ({ projects }: ProjectListProps) => {
           </AnimatePresence>
 
           {/* Pagination dots for mobile */}
-          <div className="flex items-center justify-center gap-2 mt-6">
+          <div className="flex items-center justify-center gap-2 mt-4">
             {projects.map((_, index) => (
               <button
                 key={index}
