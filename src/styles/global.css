@@ -76,10 +76,13 @@
 }
 
 html {
-  overflow-x: hidden;
+  overflow: hidden;
   width: 100%;
   max-width: 100vw;
-  position: relative;
+  height: 100vh;
+  height: 100dvh;
+  position: fixed;
+  inset: 0;
 }
 
 img {
@@ -99,10 +102,13 @@ body {
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow: hidden;
   width: 100%;
   max-width: 100vw;
-  position: relative;
+  height: 100vh;
+  height: 100dvh;
+  position: fixed;
+  inset: 0;
 }
 
 /* Focus styles */
