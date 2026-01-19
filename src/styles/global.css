@@ -1,0 +1,194 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Typography */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Charm", cursive;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Spacing scale - Tailwind default */
+  /* Using Tailwind's built-in spacing utilities */
+
+  /* Light theme colors */
+  --color-background: #fdfdfc;
+  --color-foreground: #0a0a0a;
+  --color-muted: #646464;
+  --color-border: rgba(0, 0, 0, 0.1);
+  --color-button-bg: rgba(0, 0, 0, 0.1);
+  --color-button-hover: rgba(0, 0, 0, 0.2);
+  --color-accent: #f59e0b;
+  --color-accent-hover: #d97706;
+  --color-link: #2480ed;
+  --color-link-hover: #2480ed;
+
+  /* Transitions */
+  --transition-fast: 150ms;
+  --transition-normal: 200ms;
+  --transition-slow: 300ms;
+  --transition-theme: 300ms;
+
+  /* Border radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.dark {
+  /* Dark theme colors */
+  --color-background: #0a0a0a;
+  --color-foreground: #fafafa;
+  --color-muted: #a3a3a3;
+  --color-border: rgba(255, 255, 255, 0.2);
+  --color-button-bg: rgba(255, 255, 255, 0.1);
+  --color-button-hover: rgba(255, 255, 255, 0.2);
+  --color-accent: #fbbf24;
+  --color-accent-hover: #f59e0b;
+  --color-link: #2480ed;
+  --color-link-hover: #2480ed;
+
+  /* Dark theme shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+}
+
+/* Base styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  pointer-events: none;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  transition:
+    background-color var(--transition-theme) ease,
+    color var(--transition-theme) ease;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Accessibility utilities */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.75rem 1.5rem;
+  background: var(--color-foreground);
+  color: var(--color-background);
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  z-index: 100;
+  transition: top var(--transition-fast) ease;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Link styles */
+.content-link {
+  color: #3C82F7;
+  text-decoration: underline;
+  text-decoration-color: rgba(60, 130, 247, 0.3);
+  text-underline-offset: 2px;
+  transform: skewX(-8deg);
+  display: inline-block;
+  transition: transform 300ms ease-in-out, text-decoration-color 300ms ease-in-out;
+}
+
+.content-link:hover {
+  transform: skewX(0deg);
+  text-decoration-color: #3C82F7;
+}
+
+/* Floating SVG animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(-2deg);
+  }
+  75% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+}
+
+.floating-svg {
+  animation: float 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-svg {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,86 @@
+---
+interface Link {
+  label: string;
+  url: string;
+  ariaLabel: string;
+}
+
+interface Props {
+  links?: Link[];
+}
+
+const LINK_TRANSITION_DURATION = 300;
+const LINK_GAP = 0.75;
+const DIVIDER_OPACITY = 0.4;
+
+const defaultLinks: Link[] = [
+  {
+    label: "twitter/x",
+    url: "https://x.com/0xNoushad",
+    ariaLabel: "Visit my X profile (opens in new tab)",
+  },
+  {
+    label: "github",
+    url: "https://github.com/0xNoushad",
+    ariaLabel: "Visit my GitHub profile (opens in new tab)",
+  },
+  {
+    label: "chaudharynoushad46@gmail.com",
+    url: "mailto:chaudharynoushad46@gmail.com",
+    ariaLabel: "Send me an email",
+  },
+];
+
+const { links = defaultLinks } = Astro.props;
+---
+
+<nav class="nav-container">
+  {
+    links.map((link, index) => (
+      <>
+        <a
+          href={link.url}
+          target={link.url.startsWith("http") ? "_blank" : undefined}
+          rel={link.url.startsWith("http") ? "noopener noreferrer" : undefined}
+          class="link-item"
+          aria-label={link.ariaLabel}
+        >
+          {link.label}
+        </a>
+        {index < links.length - 1 && <span class="divider" aria-hidden="true">//</span>}
+      </>
+    ))
+  }
+</nav>
+
+<style define:vars={{ 
+  linkTransitionDuration: `${LINK_TRANSITION_DURATION}ms`,
+  linkGap: `${LINK_GAP}rem`,
+  dividerOpacity: DIVIDER_OPACITY
+}}>
+  .nav-container {
+    display: flex;
+    align-items: center;
+    gap: var(--linkGap);
+    font-size: 0.875rem;
+  }
+
+  .link-item {
+    color: #3C82F7;
+    font-style: italic;
+    text-decoration: none;
+    padding: 0.5rem;
+    margin: -0.5rem;
+    cursor: pointer;
+    transition: all var(--linkTransitionDuration) ease-in-out;
+  }
+
+  .link-item:hover {
+    font-style: normal;
+  }
+
+  .divider {
+    opacity: var(--dividerOpacity);
+    pointer-events: none;
+  }
+</style>

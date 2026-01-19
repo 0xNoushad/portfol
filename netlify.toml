@@ -1,0 +1,102 @@
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+# Cache static assets
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, must-revalidate"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, must-revalidate"
+
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.jpeg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.woff"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.mp4"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.webm"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# HTML pages - always revalidate
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Compression
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Enable Brotli compression
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = true
+  minify = true
+
+[build.processing.html]
+  pretty_urls = true
+
+[build.processing.images]
+  compress = true

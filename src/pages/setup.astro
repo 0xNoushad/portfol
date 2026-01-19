@@ -1,0 +1,94 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { setup } from "@/data/setup";
+import { LinkIcon } from "@phosphor-icons/react";
+---
+
+<Layout title="setup" description="hardware and software i use daily">
+  <section class="pt-8">
+    <h1 class="text-3xl font-medium mb-2 font-display">setup</h1>
+    <p class="text-muted text-sm mb-8 sm:mb-12">hardware and software i use daily<span class="green">.</span></p>
+
+    <!-- Consistent spacing between categories: space-y-12 -->
+    <div class="space-y-8 sm:space-y-12">
+      {
+        setup.map((category) => (
+          <div>
+            <!-- Consistent typography: h2 for categories with proper sizing -->
+            <h2 class="text-base font-medium mb-4 sm:mb-6 text-foreground">
+              {category.title}
+            </h2>
+            <!-- Consistent spacing between items: space-y-4 -->
+            <ul class="space-y-3 sm:space-y-4 group/list">
+              {category.items.map((item) => (
+                <li class="group transition-opacity duration-300 group-hover/list:opacity-50 hover:!opacity-100">
+                  {item.link ? (
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="flex items-baseline justify-between gap-4 w-full"
+                      aria-label={`${item.name} (opens in new tab)`}
+                    >
+                      <div class="flex items-center gap-2 min-w-0">
+                        {/* Icon support with consistent sizing (16x16px = w-4 h-4) */}
+                        {item.icon && (
+                          <span class="flex-shrink-0 w-4 h-4 text-muted group-hover:text-[#3C82F7] transition-colors duration-300" aria-hidden="true">
+                            {item.icon}
+                          </span>
+                        )}
+                        <span class="text-foreground group-hover:text-[#3C82F7] transition-colors duration-300 inline-flex items-center gap-1.5 min-w-0">
+                          <span class="truncate">{item.name}</span>
+                          <LinkIcon
+                            className="flex-shrink-0 w-3.5 h-3.5 opacity-40"
+                            aria-hidden="true"
+                          />
+                        </span>
+                      </div>
+                      {/* Consistent body text for descriptions */}
+                      {item.description && (
+                        <span class="text-muted text-sm text-right flex-shrink-0 group-hover:text-foreground transition-colors duration-300">
+                          {item.description}
+                        </span>
+                      )}
+                    </a>
+                  ) : (
+                    <div class="flex items-baseline justify-between gap-4">
+                      <div class="flex items-center gap-2 min-w-0">
+                        {/* Icon support with consistent sizing (16x16px = w-4 h-4) */}
+                        {item.icon && (
+                          <span class="flex-shrink-0 w-4 h-4 text-muted" aria-hidden="true">
+                            {item.icon}
+                          </span>
+                        )}
+                        <span class="text-foreground truncate">{item.name}</span>
+                      </div>
+                      {/* Consistent body text for descriptions */}
+                      {item.description && (
+                        <span class="text-muted text-sm text-right flex-shrink-0">
+                          {item.description}
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <a
+      href="/"
+      class="text-muted block mt-64 sm:mt-16 underline hover:text-foreground transition-colors duration-300"
+      >back to home</a
+    >
+  </section>
+</Layout>
+
+<style>
+  .green {
+    color: #10b981;
+  }
+</style>

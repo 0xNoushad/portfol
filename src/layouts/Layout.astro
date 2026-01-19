@@ -1,0 +1,155 @@
+---
+import "../styles/global.css";
+import { ClientRouter, fade } from "astro:transitions";
+
+import Footer from "@/components/Footer.astro";
+import FloatingSVG from "@/components/FloatingSVG";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  wide?: boolean;
+  preloadImages?: string[];
+  showThemeToggle?: boolean;
+}
+
+const {
+  title = "noushad",
+  description = "testing my limits, and having fun.",
+  image = "/og-image.png",
+  wide = false,
+  preloadImages = [],
+  showThemeToggle = false,
+} = Astro.props;
+
+const canonicalURL = new URL(
+  Astro.url.pathname,
+  Astro.site || "https://noushad.live"
+);
+const fullTitle = title === "noushad" ? title : `${title} | noushad`;
+---
+
+<html lang="en" transition:animate={fade({ duration: '0.3s' })}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO -->
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+
+    <!-- Robots -->
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@0xNoushad" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    {preloadImages.map((src) => <link rel="preload" as="image" href={src} />)}
+
+    <link
+      rel="preload"
+      href="https://fonts.gstatic.com/s/inter/v18/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+      rel="stylesheet"
+    />
+    <ClientRouter />
+    <script is:inline>
+      (function () {
+        function applyTheme() {
+          const theme =
+            localStorage.getItem("theme") ||
+            (window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light");
+          if (theme === "dark") {
+            document.documentElement.classList.add("dark");
+          } else {
+            document.documentElement.classList.remove("dark");
+          }
+        }
+
+        applyTheme();
+
+        document.addEventListener("astro:after-swap", applyTheme);
+      })();
+    </script>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+    
+    <!-- SVG Decorations -->
+    <FloatingSVG client:load svg="/svg/hello.svg" top="10%" right="5%" size="md" rotate={15} />
+    <FloatingSVG client:load svg="/svg/star.svg" top="15%" left="8%" size="sm" rotate={-25} />
+    <FloatingSVG client:load svg="/svg/love.svg" top="45%" right="3%" size="sm" rotate={12} />
+    <FloatingSVG client:load svg="/svg/bee.svg" bottom="20%" left="6%" size="lg" rotate={-18} />
+    <FloatingSVG client:load svg="/svg/pencil.svg" top="8%" left="35%" size="sm" rotate={45} />
+    <FloatingSVG client:load svg="/svg/rainbow.svg" top="55%" left="2%" size="md" rotate={-8} />
+    <FloatingSVG client:load svg="/svg/hands.svg" bottom="15%" right="7%" size="md" rotate={22} />
+    <FloatingSVG client:load svg="/svg/eyes.svg" bottom="10%" left="40%" size="sm" rotate={-30} />
+    <FloatingSVG client:load svg="/svg/face.svg" top="35%" right="12%" size="lg" rotate={-12} />
+    <FloatingSVG client:load svg="/svg/computer.svg" top="25%" left="15%" size="md" rotate={8} />
+    <FloatingSVG client:load svg="/svg/idea.svg" bottom="35%" right="15%" size="sm" rotate={-15} />
+    <FloatingSVG client:load svg="/svg/paperplane.svg" top="60%" right="8%" size="sm" rotate={35} />
+    <FloatingSVG client:load svg="/svg/me.svg" top="50%" right="18%" size="md" rotate={-10} />
+    <FloatingSVG client:load svg="/svg/her.svg" top="48%" right="25%" size="sm" rotate={12} />
+    <FloatingSVG client:load svg="/svg/camera.svg" bottom="50%" left="18%" size="md" rotate={-22} />
+    <FloatingSVG client:load svg="/svg/graph.svg" top="70%" left="25%" size="sm" rotate={15} />
+    <FloatingSVG client:load svg="/svg/music.svg" bottom="5%" right="20%" size="sm" rotate={-35} />
+    <FloatingSVG client:load svg="/svg/save.svg" top="30%" left="45%" size="sm" rotate={28} />
+    <FloatingSVG client:load svg="/svg/percent.svg" top="18%" right="30%" size="sm" rotate={-12} />
+    <FloatingSVG client:load svg="/svg/question.svg" bottom="40%" right="5%" size="sm" rotate={20} />
+    <FloatingSVG client:load svg="/svg/box.svg" top="42%" left="10%" size="md" rotate={-18} />
+    <FloatingSVG client:load svg="/svg/plan.svg" bottom="25%" right="35%" size="sm" rotate={15} />
+    <FloatingSVG client:load svg="/svg/startup.svg" top="65%" right="12%" size="md" rotate={-25} />
+    <FloatingSVG client:load svg="/svg/story.svg" bottom="60%" left="35%" size="sm" rotate={30} />
+    <FloatingSVG client:load svg="/svg/traingle.svg" top="52%" left="48%" size="sm" rotate={-8} />
+    
+    <div id="site-content" class="transition-opacity duration-500" transition:animate={fade({ duration: '0.3s' })}>
+      <main
+        id="main-content"
+        class:list={[
+          "relative z-10 flex flex-col min-h-screen mx-auto px-8 pt-20",
+          wide ? "max-w-6xl" : "max-w-4xl",
+        ]}
+      >
+        <slot />
+        <Footer showThemeToggle={showThemeToggle} />
+      </main>
+    </div>
+    <script>
+      import { initKeyboardShortcuts } from "@/lib/keyboard";
+
+      initKeyboardShortcuts();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+---
+import MinimalLayout from "@/layouts/MinimalLayout.astro";
+---
+
+<MinimalLayout title="404">
+  <section class="fixed inset-0 left-0 right-0 top-0 bottom-0 w-screen h-screen overflow-hidden" style="margin: 0; padding: 0;">
+    <img src="/svg/404.svg" alt="404 Not Found" class="w-full h-full object-cover dark:invert" />
+    <a 
+      href="/" 
+      class="absolute top-[65%] sm:top-[68%] left-[53%] sm:left-[51%] -translate-x-1/2 text-foreground underline hover:no-underline transition-colors text-xl font-medium z-10"
+    >
+      back to home
+    </a>
+  </section>
+</MinimalLayout>

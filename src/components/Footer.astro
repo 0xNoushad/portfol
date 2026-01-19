@@ -1,0 +1,17 @@
+---
+import ThemeToggle from "@/components/ThemeToggle";
+
+interface Props {
+  showThemeToggle?: boolean;
+}
+
+const { showThemeToggle = false } = Astro.props;
+---
+
+<footer class="py-8 mt-auto flex items-center justify-end">
+  {showThemeToggle && (
+    <div class="flex items-center gap-2">
+      <ThemeToggle client:load />
+    </div>
+  )}
+</footer>

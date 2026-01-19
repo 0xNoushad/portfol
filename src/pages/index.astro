@@ -1,0 +1,47 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import AboutMe from "@/components/AboutMe.astro";
+
+---
+
+<Layout showThemeToggle>
+  <section class="pt-8">
+    <h1 class="text-3xl font-medium font-display">Noushad</h1>
+    <p class="text-muted mt-1">building software, <span class="scratched-out">one</span> four problems at a time<span class="green">.</span></p>
+  </section>
+
+  <section class="py-8">
+    <AboutMe />
+  </section>
+</Layout>
+
+<style>
+  .scratched-out {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .scratched-out::before,
+  .scratched-out::after {
+    content: '';
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    height: 2.5px;
+    background: #ff3f3f;
+  }
+  
+  .scratched-out::before {
+    top: 48%;
+    transform: rotate(-4deg);
+  }
+  
+  .scratched-out::after {
+    top: 52%;
+    transform: rotate(3deg);
+  }
+
+  .green {
+    color: #10b981;
+  }
+</style>
